@@ -7,19 +7,20 @@
             <div>
                 <div class="card w-72 bg-neutral-content shadow-none p-4">
                     <div class="card-body text-slate-950 items-center text-center">
-                        <h2 class="card-title">Tap the glass!</h2>
+                        <h2 class="card-title">Tap the glass for a beer!</h2>
                         <ng-container *ngrxLet="drinkCount$ as count">
-                            <p *ngIf="count > 0; else dehydrated">You've drunk {{count}} {{count > 1 ? "cups of water" :
-                                "cup of water"}}</p>
-                            <ng-template #dehydrated>
-                                <p>You must be thirsty!</p>
+                            <p *ngIf="count > 0 && count < 5">You've drunk {{count}} {{count > 1 ?
+                                "beers" :
+                                "beer"}} 🍻.</p>
+                            <p *ngIf="count >= 5">You've drunk {{count}} beers. 🍻. ⚠ You're definetely drunk now buddy. ⚠ </p>
+                            <ng-template *ngIf="count == 0">
+                                <p>You are sober!</p>
                             </ng-template>
                         </ng-container>
                     </div>
-                    <figure *ngrxLet="isDrinking$ as isDrinking" class="p-2 cursor-pointer" (click)="isDrinking ? slowDown() : drink()"><ng-lottie [options]="cupOptions"
-                            (animationCreated)="animationCreated($event)"
-                            (loopComplete)="loopComplete()"
-                            ></ng-lottie>
+                    <figure *ngrxLet="isDrinking$ as isDrinking" class="p-2 cursor-pointer"
+                        (click)="isDrinking ? slowDown() : drink()"><ng-lottie [options]="cupOptions"
+                            (animationCreated)="animationCreated($event)" (loopComplete)="loopComplete()"></ng-lottie>
                     </figure>
                 </div>
             </div>
@@ -32,5 +33,6 @@
         </div>
     </ng-template>
 
-    <ion-toast *ngIf="errors$ | async as errors" [isOpen]="!!errors" [message]="errors?.message" [duration]="5000"></ion-toast>
+    <ion-toast *ngIf="errors$ | async as errors" [isOpen]="!!errors" [message]="errors?.message"
+        [duration]="5000"></ion-toast>
 </ion-content>

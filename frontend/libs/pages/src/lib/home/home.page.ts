@@ -13,7 +13,7 @@ import { AlertController } from '@ionic/angular';
 export class HomePage implements OnInit {
 
   cupOptions: AnimationOptions = {
-    path: '/assets/lottie/water.json',
+    path: '/assets/lottie/beer.json',
     autoplay: false
   };
 
