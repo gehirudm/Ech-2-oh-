@@ -13,6 +13,11 @@ import * as fromHome from './+state/home.reducer';
 import { HomeEffects } from './+state/home.effects';
 import { HomeFacade } from './+state/home.facade';
 
+import { ServicesModule } from "@frontend/services";
+import { LottieModule } from 'ngx-lottie';
+import { GlobalStateModule } from '@frontend/global-state';
+import { LetDirective } from '@ngrx/component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -21,6 +26,10 @@ import { HomeFacade } from './+state/home.facade';
     HomePageRoutingModule,
     StoreModule.forFeature(fromHome.HOME_FEATURE_KEY, fromHome.homeReducer),
     EffectsModule.forFeature([HomeEffects]),
+    LottieModule,
+    GlobalStateModule,
+    ServicesModule,
+    LetDirective,
   ],
   declarations: [HomePage],
   providers: [HomeFacade],

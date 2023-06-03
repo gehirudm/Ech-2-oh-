@@ -1,13 +1,36 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>home</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding font-satoshi">
+    <ng-container *ngIf="loaded$ | async as loaded; else loading">
+        <div class="w-full h-full flex flex-col items-center justify-center">
+            <div class="h-1/4">
+                <h1 class="text-2xl text-slate-200 font-bold" *ngrxLet="username$ as username">Hello, {{username}}</h1>
+            </div>
+            <div>
+                <div class="card w-72 bg-neutral-content shadow-none p-4">
+                    <div class="card-body text-slate-950 items-center text-center">
+                        <h2 class="card-title">Tap the glass!</h2>
+                        <ng-container *ngrxLet="drinkCount$ as count">
+                            <p *ngIf="count > 0; else dehydrated">You've drunk {{count}} {{count > 1 ? "cups of water" :
+                                "cup of water"}}</p>
+                            <ng-template #dehydrated>
+                                <p>You must be thirsty!</p>
+                            </ng-template>
+                        </ng-container>
+                    </div>
+                    <figure *ngrxLet="isDrinking$ as isDrinking" class="p-2 cursor-pointer" (click)="isDrinking ? slowDown() : drink()"><ng-lottie [options]="cupOptions"
+                            (animationCreated)="animationCreated($event)"
+                            (loopComplete)="loopComplete()"
+                            ></ng-lottie>
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </ng-container>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">home</ion-title>
-    </ion-toolbar>
-  </ion-header>
+    <ng-template #loading>
+        <div class="w-full h-full flex justify-center items-center">
+            <ng-lottie width="200px" height="200px" [options]="loaderOptions"></ng-lottie>
+        </div>
+    </ng-template>
+
+    <ion-toast *ngIf="errors$ | async as errors" [isOpen]="!!errors" [message]="errors?.message" [duration]="5000"></ion-toast>
 </ion-content>

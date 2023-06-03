@@ -1,14 +1,20 @@
 import { createAction, props } from '@ngrx/store';
-import { LoginEntity } from './login.models';
 
 export const initLogin = createAction('[Login Page] Init');
 
-export const loadLoginSuccess = createAction(
-  '[Login/API] Load Login Success',
-  props<{ login: LoginEntity[] }>()
+export const login = createAction(
+  '[Login Page] Login',
+  props<{ username: string }>()
 );
 
-export const loadLoginFailure = createAction(
+export const loginSuccess = createAction(
+  '[Login/API] Login Success',
+  props<{ id: string, username: string }>()
+);
+
+export const loginFailure = createAction(
   '[Login/API] Load Login Failure',
   props<{ error: any }>()
 );
+
+

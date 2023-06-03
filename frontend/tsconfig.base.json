@@ -15,6 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@frontend/global-state": ["libs/global-state/src/index.ts"],
       "@frontend/pages": ["libs/pages/src/index.ts"],
       "@frontend/services": ["libs/services/src/index.ts"]
     }

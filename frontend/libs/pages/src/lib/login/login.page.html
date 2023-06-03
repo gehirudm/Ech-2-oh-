@@ -1,13 +1,30 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="ion-padding font-satoshi">
+  <div class="w-full h-full flex justify-center items-center">
+    <div class="card w-96 bg-neutral-content shadow-xl">
+      <div class="card-body items-center space-y-3">
+        <h1 class="card-title text-2xl">Login</h1>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">login</ion-title>
-    </ion-toolbar>
-  </ion-header>
+        <form [formGroup]="loginForm">
+          <ion-input formControlName="username" label="Username" label-placement="floating" fill="outline"></ion-input>
+
+          <div class="card-actions flex items-center justify-center mt-4">
+
+            <ng-container *ngIf="isLoggingIn$ | async as isLoggingIn; else loginButton">
+              <button class="btn btn-primary">
+                <span class="loading loading-spinner"></span>
+                Logging In
+              </button>
+            </ng-container>
+
+            <ng-template #loginButton>
+              <button *ngrxLet="errors$ as errors" (click)="login()" [ngClass]="errors ? 'btn-error' : 'btn-primary'"
+                class="btn">{{errors ? "Retry Login" : "Login"}}</button>
+            </ng-template>
+
+          </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
 </ion-content>

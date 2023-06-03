@@ -13,15 +13,18 @@ export class LoginFacade {
    * Combine pieces of state using createSelector,
    * and expose them as observables through the facade.
    */
-  loaded$ = this.store.pipe(select(LoginSelectors.selectLoginLoaded));
-  allLogin$ = this.store.pipe(select(LoginSelectors.selectAllLogin));
-  selectedLogin$ = this.store.pipe(select(LoginSelectors.selectEntity));
-
+  
+  isLoggingIn$ = this.store.select(LoginSelectors.selectIsLoggingIn)
+  error$ = this.store.select(LoginSelectors.selectLoginErrors)
   /**
    * Use the initialization action to perform one
    * or more tasks in your Effects.
    */
   init() {
     this.store.dispatch(LoginActions.initLogin());
+  }
+
+  login(username: string) {
+    this.store.dispatch(LoginActions.login({ username }))
   }
 }
