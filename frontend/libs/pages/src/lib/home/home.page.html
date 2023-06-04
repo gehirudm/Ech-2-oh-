@@ -1,7 +1,7 @@
 <ion-content [fullscreen]="true" class="ion-padding font-satoshi">
     <ng-container *ngIf="loaded$ | async as loaded; else loading">
         <div class="w-full flex flex-col items-center justify-center">
-            <div class="h-1/4">
+            <div class="h-20">
                 <h1 class="text-2xl text-slate-200 font-bold" *ngrxLet="username$ as username">Hello, {{username}}</h1>
             </div>
             <div>
